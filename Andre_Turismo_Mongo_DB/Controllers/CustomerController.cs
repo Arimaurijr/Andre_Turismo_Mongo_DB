@@ -38,7 +38,7 @@ namespace Andre_Turismo_Mongo_DB.Controllers
             AddressModel endereco = _addressService.Create(customer.Endereco);
             endereco.Cidade = city;
             customer.Endereco = endereco;
-            
+ 
             return _customerService.Create(customer);   
             
         }

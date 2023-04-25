@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.Configure<ProjMDSettings>(builder.Configuration.GetSection("ProjMDSettings"));
 builder.Services.AddSingleton<IProjMDSettings>(s => s.GetRequiredService<IOptions<ProjMDSettings>>().Value);
 
-//injeçã de dependência
+//injeção de dependência
 builder.Services.AddSingleton<CustomerService>();
 builder.Services.AddSingleton<AddressService>();
 builder.Services.AddSingleton<CityService>();
