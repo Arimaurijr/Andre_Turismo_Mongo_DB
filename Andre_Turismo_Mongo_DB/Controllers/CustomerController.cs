@@ -10,10 +10,14 @@ namespace Andre_Turismo_Mongo_DB.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly CustomerService _customerService;
+        private readonly AddressService _addressService;
+        private readonly CityService _cityService;
 
-        public CustomerController(CustomerService customerService)
+        public CustomerController(CustomerService customerService, AddressService addressService, CityService cityService)
         {
             _customerService = customerService;
+            _addressService = addressService;
+            _cityService = cityService;
         }
         [HttpGet]
         public ActionResult<List<CustomerModel>> Get() => _customerService.Get();
@@ -29,7 +33,14 @@ namespace Andre_Turismo_Mongo_DB.Controllers
         [HttpPost]
         public ActionResult<CustomerModel> Create(CustomerModel customer)
         {
-            return _customerService.Create(customer);
+            //return _customerService.Create(customer);
+            CityModel city = _cityService.Create(customer.Endereco.Cidade);
+            AddressModel endereco = _addressService.Create(customer.Endereco);
+            endereco.Cidade = city;
+            customer.Endereco = endereco;
+            
+            return _customerService.Create(customer);   
+            
         }
         [HttpPut("{id:length(24)}")]
         public ActionResult Update(string id, CustomerModel customer)

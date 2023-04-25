@@ -12,15 +12,10 @@ namespace Andre_Turismo_Mongo_DB.Controllers
     public class AddressController : ControllerBase
     {
         private readonly AddressService _addressService;
-
-        /// 
-        /// 
         private readonly CityService _cityService;
         public AddressController(AddressService addressService, CityService cityService) 
         {
             _addressService = addressService; 
-            
-            //
             _cityService = cityService;
         }
         [HttpGet]
