@@ -43,7 +43,17 @@ namespace Andre_Turismo_Mongo_DB.Controllers
         [HttpPut("{id:length(24)}")]
         public ActionResult Update(string id, AddressModel address)
         {
-            var c = _cityService.Get(id);
+            var c = _cityService.Get(address.Cidade.Id);
+            if (c == null) return NotFound();
+
+            var a = _addressService.Get(id);
+            if (a == null) return NotFound();
+
+            _addressService.Update(id, address);
+            return Ok();
+
+            /*
+            var c = _cityService.Get(address.Cidade.Id);
             if (c == null)
             {
                 var city = _cityService.Create(address.Cidade);
@@ -55,6 +65,7 @@ namespace Andre_Turismo_Mongo_DB.Controllers
 
             _addressService.Update(id, address);
             return Ok();
+            */
         }
         [HttpDelete("{id:length(24)}")]
         public ActionResult Delete(string id)

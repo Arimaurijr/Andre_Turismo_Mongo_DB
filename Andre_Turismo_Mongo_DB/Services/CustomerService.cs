@@ -27,7 +27,7 @@ namespace Andre_Turismo_Mongo_DB.Services
             _customer.InsertOne(customer);
             return customer;
         }
-        public void Update(string id, CustomerModel customer)
+        public void Update(string id,CustomerModel customer)
         {
             _customer.ReplaceOne(c => customer.Id == c.Id, customer);
         }

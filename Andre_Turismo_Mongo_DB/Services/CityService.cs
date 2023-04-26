@@ -29,7 +29,7 @@ namespace Andre_Turismo_Mongo_DB.Services
         }
         public void Update(string id, CityModel city)
         {
-            _city.ReplaceOne(c => city.Id == id, city);
+            _city.ReplaceOne(c => c.Id == id, city);
         }
         public void Delete(CityModel city)
         {
