@@ -45,11 +45,11 @@ namespace Andre_Turismo_Mongo_DB.Controllers
         [HttpPut("{id:length(24)}")]
         public ActionResult Update(string id, CustomerModel customer)
         {
-            //var city = _cityService.Get(customer.Endereco.Cidade.Id);
+            var city = _cityService.Get(customer.Endereco.Cidade.Id);
             var address = _addressService.Get(customer.Endereco.Id);
             var customer_1 = _customerService.Get(customer.Id);
 
-            if(address == null || customer_1 == null)
+            if(city == null || address == null || customer_1 == null)
             {
                 return NotFound();
             }
@@ -60,6 +60,8 @@ namespace Andre_Turismo_Mongo_DB.Controllers
 
             }
             /*
+             * 
+             * //customer.Endereco = address;
             var city_1 = _cityService.Get(customer.Endereco.Cidade.Id);
             if(city_1 == null)
             {

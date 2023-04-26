@@ -43,14 +43,33 @@ namespace Andre_Turismo_Mongo_DB.Controllers
         [HttpPut("{id:length(24)}")]
         public ActionResult Update(string id, AddressModel address)
         {
+            var city = _cityService.Get(address.Cidade.Id);
+            var address1 = _addressService.Get(id);
+
+            if(city == null || address1 == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                _addressService.Update(id, address);
+                return Ok();
+            }
+                
+
+            /*
             var c = _cityService.Get(address.Cidade.Id);
             if (c == null) return NotFound();
 
             var a = _addressService.Get(id);
             if (a == null) return NotFound();
 
+            address.Cidade = c;
             _addressService.Update(id, address);
             return Ok();
+            */
+
+
 
             /*
             var c = _cityService.Get(address.Cidade.Id);
